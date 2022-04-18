@@ -47,7 +47,14 @@ if ($query->have_posts()):
                         <div class="news__item">
                         <div class="news__head">
                            <?php echo get_the_post_thumbnail('', array(364, 193), array('class' => 'large__img', 'class'    =>  'news__img')); ?>
-                            <span class="news__badge blue-badge"> <?php echo get_the_terms( get_the_ID(), 'category' )[0]->name; ?> </span>
+
+                            <?php foreach ( get_the_category() as $category ) {printf(
+
+		'<a href="%s" class="news__badge blue-badge" target="_blank">%s</a>', // Шаблон вывода ссылки
+		esc_url( get_category_link( $category ) ), // Ссылка на рубрику
+		esc_html( $category->name ) // Название рубрики
+	);
+}?>
                         </div>
                         <div class="news__main">
                             <a class="news__link" href="<?php echo get_permalink(); ?>">
