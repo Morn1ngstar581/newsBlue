@@ -14,7 +14,12 @@ $query = new WP_Query(['post_type' => 'post', 'post_status' => array('publish'),
                     <div class="news__item">
                         <div class="news__head">
                             <?php echo get_the_post_thumbnail('', array(364, 193), array('class' => ' news__img')); ?>
-                            <span class="news__badge blue-badge"> <?php echo get_the_terms( get_the_ID(), 'category' )[0]->name; ?> </span>
+                            <?php
+                            $categories = get_the_category();
+                            if (!empty($categories)) {
+                                echo '<a  href="' . esc_url(get_category_link($categories[0]->term_id)) . '" class="news__badge blue-badge" >' . esc_html($categories[0]->name) . '</a>';
+                            }
+                            ?>
                         </div>
                         <div class="news__main">
                             <a class="news__link" href="<?php echo get_permalink(); ?>">

@@ -16,9 +16,9 @@
             <?php get_template_part('template-parts/footer/site-footer');?>
 
 
-
+            <?php wp_footer(); ?>
 	</footer>
 
 
-<?php wp_footer(); ?>
+
 

@@ -44,8 +44,13 @@
                 ?>
                 <div class="category__item">
                     <div class="category__long">
-                        <div class="category__head">
-                            <span class="category__name"><?php echo  get_the_terms(get_the_ID(), 'category')[0]->name; ?></span>
+                        <div class="category__head category__head-pr">
+                            <?php
+                            $categories = get_the_category();
+                            if (!empty($categories)) {
+                                echo '<a  href="' . esc_url(get_category_link($categories[0]->term_id)) . '" class="category__name" >' . esc_html($categories[0]->name) . '</a>';
+                            }
+                            ?>
                         </div>
                         <div class="category__body">
                             <?php

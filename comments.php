@@ -31,7 +31,7 @@ if (post_password_required()) {
            Комментарии
 
         </h2>
-            <span class="arrow-toggle">
+            <span class="arrow-toggle" onclick="hideFunction()">
         <span class="arrow-right"></span>
         <span class="arrow-left"></span>
       </span>
@@ -39,7 +39,7 @@ if (post_password_required()) {
             <?php the_comments_navigation(); ?>
 
 
-            <div class="comment-body">
+            <div  id="commentBody"class="comment-body">
             <?php
             wp_list_comments(array(
                     'style' => 'div',

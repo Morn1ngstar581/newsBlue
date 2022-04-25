@@ -10,9 +10,13 @@
 ?>
 
             <div class="publication__top">
-                <span class="blue-badge">
-                     <?php echo get_the_terms(get_the_ID(), 'category')[0]->name; ?>
-                </span>
+                <?php
+                $categories = get_the_category();
+                if (!empty($categories)) {
+                    echo '<a  href="' . esc_url(get_category_link($categories[0]->term_id)) . '" class="blue-badge" >' . esc_html($categories[0]->name) . '</a>';
+                }
+                ?>
+
                 <div class="publication__info">
 
                     <div class="publication__views">
@@ -38,6 +42,10 @@
                             <?php get_template_part('template-parts/shared');?>
                             </div>
                            <?php the_author_posts_link();?>
+                        </div>
+                        <div class="publication__tags">
+                            <?php the_tags( '<li>','</li><li>','</li>'); ?>
+
                         </div>
                     </div>
                 </div>

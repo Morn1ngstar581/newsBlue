@@ -34,7 +34,7 @@ $wrapper_classes = 'header';
                 <div class="logo">
                 <?php the_custom_logo();?>
                 </div>
-                <div class="banner header__banner">
+                <div class="header__banner">
                     <a target="_blank" href="<?php the_field('banner-1-link', 'option');?> ">
                         <img class="header__banner" src="<?php the_field('banner-1-img', 'option');?> ">
                     </a>

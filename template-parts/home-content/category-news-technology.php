@@ -17,7 +17,12 @@
                         <div class="category__big">
                             <div class="category__content">
                                 <div class="category__header">
-                                    <span class="category__badge blue-badge"> <?php echo get_the_terms(get_the_ID(), 'category')[0]->name; ?> </span>
+                                    <?php
+                                    $categories = get_the_category();
+                                    if (!empty($categories)) {
+                                        echo '<a  href="' . esc_url(get_category_link($categories[0]->term_id)) . '" class="category__badge blue-badge" >' . esc_html($categories[0]->name) . '</a>';
+                                    }
+                                    ?>
                                     <span class="category__views">
                     <?php echo newsblue_get_icon_svg('ui', 'views'); ?>
                     <?php echo get_post_meta($post->ID, 'views', true); ?>
@@ -63,9 +68,13 @@
                             <div class="post__main" style="height:100%;">
                                 <div class="post__header" style="flex-shrink: 0">
                                     <?php echo get_the_post_thumbnail('', '', array('class' => 'post__img')); ?>
-                                    <span class="post__badge
-                                         blue-badge"> <?php echo get_the_terms(get_the_ID(), 'category')[0]->name; ?>
-                                    </span>
+
+                                    <?php
+                                    $categories = get_the_category();
+                                    if (!empty($categories)) {
+                                        echo '<a  href="' . esc_url(get_category_link($categories[0]->term_id)) . '" class="post__badge blue-badge" >' . esc_html($categories[0]->name) . '</a>';
+                                    }
+                                    ?>
                                 </div>
                                 <div class="post__body" style="flex-grow: 1">
                                     <a href="<?php echo get_permalink(); ?>" class="post__link">

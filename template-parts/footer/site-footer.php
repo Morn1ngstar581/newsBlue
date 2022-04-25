@@ -1,20 +1,10 @@
 <div class="container">
     <div class="footer__grid">
         <div class="footer__box">
-            <ul class="footer__menu">
-                <li class="footer__item">
-                    <a href="" class="footer__link">Контактная информация</a>
-                </li>
-                <li class="footer__item">
-                    <a href="" class="footer__link">Реклама на портале 024.by</a>
-                </li>
-                <li class="footer__item">
-                    <a href="" class="footer__link">Правила использования сайта</a>
-                </li>
-                <li class="footer__item">
-                    <a href="" class="footer__link">Публичный договор</a>
-                </li>
-            </ul>
+            <div class="footer__menu">
+                <?php get_template_part('template-parts/footer/footer-navigation');?>
+
+            </div>
         </div>
         <div class="footer__box">
             <ul class="social">
@@ -67,4 +57,4 @@
         </div>
 
     </div>
-    <div class="footer__date"> 2021, 024.by</div>
+    <div class="footer__date"> &copy; 2021-<?php echo date('Y');?>, 024.by</div>

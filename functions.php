@@ -5,7 +5,7 @@
  */
     function NewsBlue_enqueue_scripts(){
     wp_enqueue_style('NewsBlue-main', get_template_directory_uri().'/css/main.css', array(), '1.1.3.7.27', 'all');
-    wp_enqueue_script('NewsBlue-main',get_template_directory_uri().'/js/main.js',array(),'1.0',true);
+    wp_enqueue_script('NewsBlue-main',get_template_directory_uri().'/js/main.js',array(),'1.125',true);
 
 
         if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -14,10 +14,24 @@
 }
 add_action('wp_enqueue_scripts', 'NewsBlue_enqueue_scripts');
 
+    $logo_width = 206;
+    $logo_height = 60;
+add_theme_support(
+    'custom-logo',
+    array(
+        'height'               => $logo_height,
+        'width'                => $logo_width,
+        'flex-width'           => true,
+        'flex-height'          => true,
+        'unlink-homepage-logo' => true,
+    )
+);
+
 //Registrate menu location
  function newsblue_register_menu(){
      register_nav_menus(array(
          'header__navbar' =>    'Header navigation',
+         'footer__navbar' =>    'Footer navigation',
      ));
  }
 // удаляем url в комментариях
@@ -349,4 +363,37 @@ function my_navigation_template( $template, $class ){
 		<div class="nav-links">%3$s</div>
 	</div>
 	';
+}
+
+// Удаление id у элементов li - footer__menu
+add_filter('nav_menu_item_id', 'filter_menu_item_css_id_1', 10, 4);
+function filter_menu_item_css_id_1($menu_id, $item,$args, $depth){
+    return $args->theme_location === 'footer__navbar' ? '' : $menu_id;
+}
+//Изменение атрибут class li
+add_filter('nav_menu_css_class', 'filter_nav_menu_css_classes_1', 10,4);
+function filter_nav_menu_css_classes_1($classes,$item,$args,$depth){
+    if ($args->theme_location === 'footer__navbar'){
+        $classes =[
+            'footer__item',
+
+        ];
+        if($item->current){
+            $classes[]= 'footer__item-active';
+        }
+    }
+    return $classes;
+}
+// изменяем класс у footer__link
+//change links header
+add_filter('nav_menu_link_attributes', 'filter_nav_menu_link_attributes_1', 10, 4);
+function filter_nav_menu_link_attributes_1($atts, $item, $args, $depth)
+{
+    if ($args->theme_location === 'footer__navbar') {
+        $atts['class'] = 'footer__link';
+        if ($item->current) {
+            $atts['class'] = 'footer__link-active';
+        }
+    }
+    return $atts;
 }

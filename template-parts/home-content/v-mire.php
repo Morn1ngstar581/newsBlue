@@ -12,8 +12,13 @@ if ($query->have_posts()):
                     while ($query->have_posts()):
                         $query->the_post();
                         ?>
-                        <div class="extra__item" >
-                        <span   class="blue-badge category__badge"><?php echo get_the_terms(get_the_ID(), 'category')[0]->name; ?></span>
+                        <div class="extra__item">
+                            <?php
+                            $categories = get_the_category();
+                            if (!empty($categories)) {
+                                echo '<a  href="' . esc_url(get_category_link($categories[0]->term_id)) . '" class="blue-badge category__badge" >' . esc_html($categories[0]->name) . '</a>';
+                            }
+                            ?>
                                                     <a href="<?php echo the_permalink();?>" class="extra__link">
                                 <h2 class="extra__title"><?php the_title();?></h2>
 
@@ -48,7 +53,12 @@ if ($query->have_posts()):
                         <div class="news__item">
                         <div class="news__head">
                             <img alt="" class="news__img" src="<?php echo get_the_post_thumbnail('', array(364, 193), array('class' => 'large__img')); ?>
-                            <span class="news__badge blue-badge"> <?php echo get_the_terms( get_the_ID(), 'category' )[0]->name; ?> </span>
+                      <?php
+                            $categories = get_the_category();
+                            if (!empty($categories)) {
+                                echo '<a  href="' . esc_url(get_category_link($categories[0]->term_id)) . '" class="blue-badge news__badge" >' . esc_html($categories[0]->name) . '</a>';
+                            }
+                            ?>
                         </div>
                         <div class="news__main">
                             <a class="news__link" href="<?php echo get_permalink(); ?>">

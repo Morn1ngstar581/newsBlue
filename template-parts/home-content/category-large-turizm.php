@@ -13,7 +13,12 @@ $id = $post->ID;
             $query->the_post();
             ?>
                 <div class="large-pop" style=" position:relative; display: block" >
-                    <span class="white-badge"><?php echo get_the_terms(get_the_ID(), 'category')[0]->name; ?> </span>
+                    <?php
+                    $categories = get_the_category();
+                    if (!empty($categories)) {
+                        echo '<a  href="' . esc_url(get_category_link($categories[0]->term_id)) . '" class="white-badge" >' . esc_html($categories[0]->name) . '</a>';
+                    }
+                    ?>
             <a href="<?php echo get_permalink(); ?>" class="large__link">
 
                 <?php echo get_the_post_thumbnail('', 'full', array('class' => 'large__img'));?>
